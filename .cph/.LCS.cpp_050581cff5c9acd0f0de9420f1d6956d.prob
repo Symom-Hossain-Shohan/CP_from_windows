@@ -1,0 +1,1 @@
+{"name":"Local: LCS","url":"c:\\Users\\ASUS\\projects\\helloworld\\LCS.cpp","tests":[{"id":1613578624582,"input":"hellom\nhmrll","output":"3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\ASUS\\projects\\helloworld\\LCS.cpp","group":"local","local":true}
