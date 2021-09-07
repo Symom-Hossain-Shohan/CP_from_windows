@@ -33,31 +33,18 @@ inline ll modDiv(ll a ,ll b) { return modMul(a,modInverse(b)) ;}
 
 
 typedef tree<ll,null_type,less<ll>,rb_tree_tag,tree_order_statistics_node_update>ordered_set;
-//code goes from here...
-string s1,s2;
-ll n, m;
 
-ll dp[101][101];
+int dRow[] = { -1, 0, 1, 0 };
+int dCol[] = { 0, 1, 0, -1 };
 
-ll DP(ll i,ll j)
-{
-    if(i==n || j==m) return 0;
-    if(dp[i][j]!=-1) return dp[i][j];
-
-    ll ans=0;
-    if(s1[i]==s2[j])
-    {
-        ans=1+DP(i+1,j+1);
-    }
-    else 
-    {
-        ll val1=DP(i+1,j);
-        ll val2=DP(i,j+1);
-        ans=max(val1,val2);
-    }
-
-    return dp[i][j]=ans;
+ll ext_gcd(ll a, ll b, ll& x, ll& y) {
+    if (b == 0) {x = 1;y = 0;return a;}
+    ll x1, y1, d = ext_gcd(b, a % b, x1, y1);
+    x = y1;y = x1 - y1 * (a / b);
+    return d;
 }
+
+//code goes from here...
 
 
 
@@ -71,13 +58,24 @@ int main()
 
     boost
     //---------------------------------
-    cin >> s1 >> s2;
-    mem(dp,-1);
-     n=s1.size();
-     m=s2.size();
-    
-    cout << DP(0,0) << endl;
+    string a,b;
+    cin >> a >> b;
+    ll n=a.size();
+    ll m=b.size();
 
+    ll dp[n+1][m+1];
+
+    for(ll i=0;i<=n;i++)
+    {
+        for(ll j=0;j<=m;j++)
+        {
+            if(i==0 or j==0) dp[i][j]=0;
+            else if(a[i-1]==b[j-1]) dp[i][j]=dp[i-1][j-1]+1;
+            else  dp[i][j]=max(dp[i][j-1],dp[i-1][j]);
+        }
+    }
+
+    cout << dp[n][m] << endl;
     
     //---------------------------------
     
